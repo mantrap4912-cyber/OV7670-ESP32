@@ -1,0 +1,26 @@
+
+# Build output
+# Captured frames from the examples
+# Editors
+# Python tooling
+*.a
+*.bin
+*.elf
+*.map
+*.o
+*.pyc
+*.swp
+*~
+.DS_Store
+.idea/
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/
+__pycache__/
+build/
+frame.bin
+frame.pgm
+frame.png
+frame.ppm
+frame.txt

@@ -1,0 +1,89 @@
+name: build
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  arduino:
+    name: Arduino (${{ matrix.example }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 03_LiveViewTFT needs TFT_eSPI, which is installed below so the
+        # __has_include path is exercised rather than skipped.
+        example:
+          - 01_ChipIDTest
+          - 02_StillCaptureSerial
+          - 03_LiveViewTFT
+          - 04_WiFiStreamServer
+          - 05_ContinuousBenchmark
+          - 06_ImageControls
+          - 07_StressTest
+          - 08_CaptivePortalCam
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile for esp32:esp32:esp32
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: esp32:esp32:esp32
+          platforms: |
+            - name: esp32:esp32
+              source-url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          libraries: |
+            - source-path: ./
+            - name: TFT_eSPI
+          sketch-paths: |
+            - examples/${{ matrix.example }}
+          enable-warnings-report: true
+          verbose: false
+
+  lint:
+    name: Library metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Arduino Lint
+        uses: arduino/arduino-lint-action@v1
+        with:
+          library-manager: update
+          compliance: strict
+
+  tools:
+    name: Host tooling
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Round-trip the frame decoder
+        run: |
+          python - <<'PY'
+          import base64
+          W, H = 16, 8
+          raw = bytearray()
+          for y in range(H):
+              for x in range(W):
+                  v = ((x * 2 & 0x1F) << 11) | ((y * 8 & 0x3F) << 5) | (31 - x * 2 & 0x1F)
+                  raw += bytes([(v >> 8) & 0xFF, v & 0xFF])
+          b64 = base64.b64encode(bytes(raw)).decode()
+          with open("frame.txt", "w") as f:
+              f.write("noise line from the serial monitor\n")
+              f.write("---BEGIN FRAME %d %d RGB565---\n" % (W, H))
+              f.write("\n".join(b64[i:i + 60] for i in range(0, len(b64), 60)) + "\n")
+              f.write("---END FRAME---\n")
+          PY
+          python tools/decode_frame.py frame.txt -o frame.png
+          test -s frame.png
