@@ -10,7 +10,7 @@
  * usable directly if you only want, say, the register definitions.
  *
  * Part of the OV7670-ESP32-NonFIFO library. MIT licensed.
- * https://github.com/ketan/OV7670-ESP32-NonFIFO
+ * https://github.com/mantrap4912-cyber/OV7670-ESP32
  */
 
 #pragma once

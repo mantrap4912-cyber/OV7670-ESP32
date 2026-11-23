@@ -11,10 +11,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ketan/OV7670-ESP32-NonFIFO.git"
+    "url": "https://github.com/mantrap4912-cyber/OV7670-ESP32.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/ketan/OV7670-ESP32-NonFIFO",
+  "homepage": "https://github.com/mantrap4912-cyber/OV7670-ESP32",
   "frameworks": ["arduino", "espidf"],
   "platforms": ["espressif32"],
   "headers": ["OV7670.h"],

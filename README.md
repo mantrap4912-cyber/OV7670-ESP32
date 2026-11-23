@@ -81,7 +81,7 @@ this one working, a PR saying so is very welcome.
 **PlatformIO** — add to `platformio.ini`:
 
 ```ini
-lib_deps = https://github.com/ketan/OV7670-ESP32-NonFIFO.git
+lib_deps = https://github.com/mantrap4912-cyber/OV7670-ESP32.git
 ```
 
 **ESP-IDF** — drop the directory into `components/`, or point
@@ -320,7 +320,7 @@ round-trip tested. The register tables and the DMA capture path are built from
 documented hardware behaviour and well-established reference settings, but the
 author has **not** validated them against a physical OV7670 module. Treat the
 first run as bring-up: work the examples in order, and
-[open an issue](https://github.com/ketan/OV7670-ESP32-NonFIFO/issues) with what
+[open an issue](https://github.com/mantrap4912-cyber/OV7670-ESP32/issues) with what
 you see if a milestone does not pass. Reports from real hardware are the most
 useful contribution this project can receive right now.
 

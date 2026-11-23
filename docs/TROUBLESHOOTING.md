@@ -189,7 +189,7 @@ Note the DMA ring is separate and must be internal RAM regardless; it is small
 Run `07_StressTest`, which rotates through resolutions to exercise the
 teardown/rebuild path and reports the heap every 30 seconds. If the free-heap
 column trends down, that is a genuine leak — please
-[open an issue](https://github.com/ketan/OV7670-ESP32-NonFIFO/issues) with the
+[open an issue](https://github.com/mantrap4912-cyber/OV7670-ESP32/issues) with the
 log.
 
 ---
