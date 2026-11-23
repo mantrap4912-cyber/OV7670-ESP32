@@ -1,0 +1,24 @@
+version: "1.0.0"
+description: >-
+  Hardware-DMA camera driver for a bare OV7670 (no AL422B FIFO) wired directly
+  to an ESP32. Uses the I2S0 camera peripheral to capture the 8-bit parallel
+  DVP pixel stream, with SCCB register access, LEDC XCLK generation and
+  known-good register presets from QQVGA to VGA.
+url: https://github.com/ketan/OV7670-ESP32-NonFIFO
+repository: https://github.com/ketan/OV7670-ESP32-NonFIFO.git
+issues: https://github.com/ketan/OV7670-ESP32-NonFIFO/issues
+license: MIT
+tags:
+  - camera
+  - ov7670
+  - dvp
+  - i2s
+  - dma
+
+dependencies:
+  idf:
+    version: ">=4.4"
+
+targets:
+  - esp32
+  - esp32s3

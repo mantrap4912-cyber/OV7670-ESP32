@@ -1,0 +1,31 @@
+{
+  "name": "OV7670-ESP32-NonFIFO",
+  "version": "1.0.0",
+  "description": "Hardware-DMA camera driver for a bare OV7670 (no AL422B FIFO) wired directly to an ESP32. Captures the 8-bit parallel DVP stream with the I2S0 camera peripheral instead of bit-banging GPIOs.",
+  "keywords": "ov7670, camera, esp32, i2s, dma, dvp, sccb, non-fifo, image, sensor",
+  "authors": [
+    {
+      "name": "Ketan",
+      "email": "mantrap4912@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ketan/OV7670-ESP32-NonFIFO.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ketan/OV7670-ESP32-NonFIFO",
+  "frameworks": ["arduino", "espidf"],
+  "platforms": ["espressif32"],
+  "headers": ["OV7670.h"],
+  "export": {
+    "exclude": [
+      "extras/**",
+      ".github/**"
+    ]
+  },
+  "build": {
+    "srcDir": "src",
+    "includeDir": "src"
+  }
+}
